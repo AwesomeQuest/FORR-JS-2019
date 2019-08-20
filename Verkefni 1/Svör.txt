@@ -1,0 +1,63 @@
+1. 	Undefined er default value fyrir allar breitur,
+	það þíðir að breitunni hefur ekki verið gefið value.
+	Null er value sem breitu getur verið gefið sem þíðir að breitan hefur ekkert value.
+null===undefined
+	false
+null==undefined
+	true
+undefined*0			
+	NaN
+undefined+1
+	NaN
+undefined+"0"
+	"undefined0"	D':
+undefined*"0"
+	NaN
+null*0
+	0
+null+1
+	1
+null+"0"
+	"null0"   		D':
+null*"0"
+	0
+
+
+2.	'use strict' Gerir alskonar hluti sem eru allir meintir til þess að gera Javascript 
+	léttari að skilja og lesa. Það gerir þetta með því að gera fleirri hluti villur.
+	T.d. með 'use strict' er ekki hægt að nota breitu án þess að lýsa henni fyrst,
+	þetta er hægt í venjulegu Javascript vegna þessa að Brendan Eich er brjálaður.
+	
+	'use strict'; g=0; g;
+	
+	
+3.	var er gamla leiðin til að lýsa breitu í Javascript. var gildir bara inn í sýnu eigin 
+	function eða er global, þetta er scope var breitu. var er initialised, 
+	sem þýðir að því er gefið gildið undefined um leið og því er lýst. 
+	var getur líka verið endur lýst, sem þíðir að þótt var breitu var lýst í öðru scope 
+	fyrir á, getur það verið endur lýst sem ný breita með gildið undefined.
+	
+	var func = function() {var y = 9; console.log(y);}; func(); y; 
+		9
+		Uncaught ReferenceError: y is not defined
+		
+	var g; g;
+		undefined
+	
+	'use strict'; g = 0; g; var g;
+		0			MAGIC!!!	(hoisting)
+		
+	var func = function() {var y = 9; console.log(y);}; func(); y; var y;
+		9
+		undefined
+	
+	let er ný leið til að lýsa breitu í Javascript. let gildir bara inn í hrokk svigunum {}
+	sem því var lýst í. let er ekki initialised um leið og því er lýst. 
+	let getur ekki verið endur lýst.
+	
+	if(true){let y = 57; console.log(y)} y;
+		57
+		Uncaught ReferenceError: y is not defined
+		
+	y; let y;
+		Uncaught ReferenceError: Cannot access 'y' before initialization

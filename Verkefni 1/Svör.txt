@@ -1,5 +1,5 @@
-1. 	Undefined er default value fyrir allar breitur,
-	það þíðir að breitunni hefur ekki verið gefið value.
+1. 	Undefined er default value fyrir allar breitur sem hafa verið initialised,
+	það þíðir að breitunni hefur ekki verið gefið value en það er samt hægt að kalla á það.
 	Null er value sem breitu getur verið gefið sem þíðir að breitan hefur ekkert value.
 null===undefined
 	false
@@ -28,7 +28,8 @@ null*"0"
 	T.d. með 'use strict' er ekki hægt að nota breitu án þess að lýsa henni fyrst,
 	þetta er hægt í venjulegu Javascript vegna þessa að Brendan Eich er brjálaður.
 	
-	'use strict'; g=0; g;
+	'use strict'; g=0;
+		Uncaught ReferenceError: g is not defined
 	
 	
 3.	var er gamla leiðin til að lýsa breitu í Javascript. var gildir bara inn í sýnu eigin 
@@ -53,7 +54,7 @@ null*"0"
 	
 	let er ný leið til að lýsa breitu í Javascript. let gildir bara inn í hrokk svigunum {}
 	sem því var lýst í. let er ekki initialised um leið og því er lýst. 
-	let getur ekki verið endur lýst.
+	let getur ekki verið endur lýst í sýnu eigin scope.
 	
 	if(true){let y = 57; console.log(y)} y;
 		57
@@ -61,3 +62,91 @@ null*"0"
 		
 	y; let y;
 		Uncaught ReferenceError: Cannot access 'y' before initialization
+
+	let y = 56; let y;
+		Uncaught SyntaxError: Identifier 'y' has already been declared
+		
+	const er mjög líkt let, hinsvegar það þarf að vera initialised umleið og því er lýst,
+	þ.e.a.s. gefið gildi, og það er ekki hægt að breita því gildi eftir á.
+	
+	const v
+		Uncaught SyntaxError: Missing initializer in const declaration
+		
+	const v = 0; v = 4
+		Uncaught TypeError: Assignment to constant variable.
+	
+4.	
+	for (let x = 9; x >= 1; x--) {
+		console.log("hello " + x);
+	}
+	
+
+5.	
+	function add1(x){
+		x = x + 1;
+		return x;
+	}
+	
+	let add1 = function(x) {
+		x = x + 1;
+		return x;
+	}
+	
+	let add1 = (x) => {
+		x = x + 1;
+		return x;
+	}
+	
+
+6.	Býr til nafnlaust function sem keirir sig sjálft 
+	og gefur popup sem segir "Hello World".
+	
+	
+7.
+	b() sækir ekki í global a breituna, vegna þess að a() er hoistað upp á topp,
+	þannig að b() breitir bara a() í integer með gildið 10.
+		
+	"use strict"; 
+	let a = 1; 
+	function b() {    
+	function a() {} 
+	a = 10;    
+	return;    
+	} 
+	b(); 
+	console.log(a); 
+ 
+
+
+8.
+	var test = [12, 929, 11, 3, 199, 1000, 7, 1, 24, 37, 4,
+    19, 300, 3775, 299, 36, 209, 148, 169, 299,
+    6, 109, 20, 58, 139, 59, 3, 1, 139
+];
+
+test.forEach(function(element){
+    if(element % 3 === 0){
+        element += 100;
+    }
+    console.log(element);
+});
+
+
+9.	
+	var bills = [50.23, 19.12, 34.01,
+    100.11, 12.15, 9.90, 29.11, 12.99,
+    10.00, 99.22, 102.20, 100.10, 6.77, 2.22
+];
+
+
+var totals = bills.map(x = x * 1.15);
+
+totals.forEach(function(element) {
+    console.log(element.toFixed(2));
+});
+
+console.log(totals);
+	
+	
+10.	
+	(function me() {me()})()

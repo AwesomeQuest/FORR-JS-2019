@@ -1,0 +1,11 @@
+function fireW(speed = 10, life = 10){
+	this.speed = speed,
+	this.life = life
+	
+}
+
+let f1 = new fireW(4,4), f2 = new fireW(5,5), f3 = new fireW(7,7);
+
+Object.getPrototypeOf(f1).fly = function(){
+	this.speed = this.speed + 1;
+}

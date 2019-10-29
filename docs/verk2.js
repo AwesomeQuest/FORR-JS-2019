@@ -18,8 +18,8 @@ let answeres = ["Vegna þess að það hættir að leita um leið og það finnu
 				"true þíðir að event-ið er sett efst á run lista vefsíðunar, false er default og þíðir að event-ið er sett á bottninn á listanum.",
 				"<code> let Person = {<br>name: 'Sam',<br>sayName: function(){<br>console.log('My name is '+ this.name);<br>}<br>};<br>buttonEl.addEventListener('click', Person.sayName.bind(Person));<br></code>" ];
 
-//mainBody.innerHTML += "<ol id=listContainer><h2>Verkefni 5.1<h2/></ol>";
 
+//create list element
 let subBody = document.createElement("ol")
 subBody.setAttribute("id", "answers");
 
@@ -30,6 +30,7 @@ subBody.appendChild(subBodyTitle);
 
 mainBody.appendChild(subBody);
 
+//Show the questions and answers
 for (let i = 0; i < questions.length - 1; i++) {
     const q = questions[i];
     const a = answeres[i];
@@ -39,18 +40,20 @@ for (let i = 0; i < questions.length - 1; i++) {
     question.appendChild(questionText);
     subBody.appendChild(question);
 
+    //show and differentiate answere from question
     let answer = document.createElement("li");
     answer.setAttribute("type", "i");
     let answerText = document.createTextNode(a);
     answer.appendChild(answerText);
     subBody.appendChild(answer);
 
+    //seperate each QnA
     let BR = document.createElement("br");
     subBody.appendChild(BR);
 
 }
 
-
+//show special code question and Answer
 let question = document.createElement("li");
 let questionText = document.createTextNode(questions[questions.length-1]);
 question.appendChild(questionText);

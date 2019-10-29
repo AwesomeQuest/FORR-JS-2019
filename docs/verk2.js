@@ -58,4 +58,3 @@ subBody.appendChild(question);
 
 let answer = answeres[answeres.length-1];
 subBody.innerHTML += answer;
-

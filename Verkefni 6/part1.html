@@ -31,12 +31,23 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+
+    //Array.filter() tekur í sig array og getur skoðað hvert element, hér kallað "inventor", 
+    //og ef bool-ið hægramegin (=> ()) er true, þá setur hann það element í nýtt array,
+    //hér kallað "fifteen".
+
+    //Ef það væri sett "true" í staðin fyrir "inventor => (inventor.year >= 1500 && inventor.year < 1600"
+    //þá myndi fifteen vera nákvæmlega eins og inventors.
     const fifteen = inventors.filter(inventor => (inventor.year >= 1500 && inventor.year < 1600));
 
     console.table(fifteen);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventor first and last names
+
+    //Array.map() virkar mikið líkt filter, en í stað þess að henda inn því element sem það er að skoða
+    //það hendir in því element sem er hægramegin við "=>". 
+    //Enn og aftur það er hægt að nota það element sem er verið að mappa
     const fullNames = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
     console.log(fullNames);
 
@@ -50,11 +61,25 @@
     //   }
     // });
 
+
+    //Array.sort() hendir inn í einhverja sorting aðferð tvö element frá array og tekur í sig
+    //númer sem er annað hvort stærra en, minna en, eða jafnt og 0, sem er skilað af aðferðinni,
+    //ef 1, þá er "a" á undan "b", ef 0 þá er stöðum þeirra ekki breit á meða við hvort annað
+    //ef -1, þá er "b" á undan "a".
+
+    //Í raun er sort() að bera öll element í array á móti öllum öðrum element í array.
+
+    //Í þessu tilviki er skoðað tvö element frá inventors, ef "year" á "a" er stærra en "year" á "b"
+    //er skilað 1, annars -1.
     const ordered = inventors.sort((a, b) => a.year > b.year ? 1 : -1);
     console.table(ordered);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+
+    //Array.reduce() skilar einni breitu, og fyrir hvert element í array, framhvæmir einhverja aðgerð
+
+    //Í þessu tilviki, fyrir hvern inventor í inventors, tekur passed - year og bætir því við total
     const totalYears = inventors.reduce((total, inventor) => {
       return total + (inventor.passed - inventor.year);
     }, 0);
@@ -62,6 +87,11 @@
     console.log(totalYears);
 
     // 5. Sort the inventors by years lived
+
+    //Hér er mjög líkt og númer 3, nema það er notað function(){} í staðinn fyrir arrow function 
+    //líklega vegna þess að það er léttara að lesa.
+
+    //annars er borði saman alla inventor og áhveðið hvor var lifandi lengur
     const oldest = inventors.sort(function(a, b) {
       const lastInventor = a.passed - a.year;
       const nextInventor = b.passed - b.year;
@@ -72,20 +102,40 @@
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
+
+    //First er fundið öll element með classan "mw" og "category", 
+    //sem eru, meðal annars, þau element sem hann vill. Hann gæti hafa leitað lika eftir "group"
+    //og þurft ekki að leita í gegnum eins mörg element seinna
     // const category = document.querySelector('.mw-category');
+
+    //Hér tekur hann öll "a" element úr listanum sínum
     // const links = Array.from(category.querySelectorAll('a'));
+
     // const de = links
+    //              Hér er skipt öllum a element í textann sem var í þeim
     //             .map(link => link.textContent)
+    //              svo skoðar hann þau og setur bara þau sem eru með "de" í sér
     //             .filter(streetName => streetName.includes('de'));
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+
+
+    //Hér gæti hann bara gert people.sort() vegna þess að þetta er default fyrir Array.sort()
+    //eins og er sýnt hér að neðan
+
+    //Hér er tekið element úr people, skipt því í tvent með split á milli ", " og sett í array
+    //svo er borið saman bæði seinni nöfnin.
     const alpha = people.sort((lastOne, nextOne) => {
       const [aLast, aFirst] = lastOne.split(', ');
       const [bLast, bFirst] = nextOne.split(', ');
       return aLast > bLast ? 1 : -1;
     });
+
     console.log(alpha);
+    
+    const beterAlpha = people.sort();
+    console.log(beterAlpha);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these

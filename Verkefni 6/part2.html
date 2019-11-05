@@ -33,10 +33,20 @@
     //   }
     // });
 
+    //Array.some() skoðar hvert element í array og skoðar hvort það fær true frá aðferðinni
+    //sem það fær. Ef eitt eða fleiri af element skilar true, skilar some() true.
+
+    //Hér er náð í árið í dag og mínusað person.year frá því, 
+    //og ef það er stærra eða jafnt og 19, er skilað true
+
     const isAdult = people.some(person => ((new Date()).getFullYear()) - person.year >= 19);
 
     console.log({isAdult});
     // Array.prototype.every() // is everyone 19?
+
+    //Array.every er sama og some, nema það skilar bara true ef öll element skila true
+
+    //Sama og það fyrir ofan nema notað Array.every().
 
     const allAdults = people.every(person => ((new Date()).getFullYear()) - person.year >= 19);
     console.log({allAdults});
@@ -45,6 +55,9 @@
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
 
+    //Array.find() skilar fyrsta element sem skilar true í aðferðinni
+
+    //Skoðað hvort comment.id er jafnt og 823423
 
     const comment = comments.find(comment => comment.id === 823423);
 
@@ -53,15 +66,35 @@
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
+
+    //Array.findIndex() skilar index af fyrsta element sem aðferðinn skillar true, 
+    //annars skilar það -1
+
+    //Ef þú skilur fyrri dæmi skilur þú þetta
+
     const index = comments.findIndex(comment => comment.id === 823423);
     console.log(index);
 
     // comments.splice(index, 1);
 
+    //Array.slice(a, b) skilar array sem hefur verið skorið af index 0 upp að a, og b upp að enda
+    //Ef a er minus tala er talið aftur á bak frá enda Array, sama gildir fyrir b
+    //let thing = [1,2,3,4,5,6,7,8,9,10];
+    //let sliceThing = thing.slice(-3, -1);
+    /*
+    sliceThing
+    [8, 9]
+    */
+
+    //Hér er skilað array sem hefur öll element með og á eftir index
+
+
     const newComments = [
       ...comments.slice(0, index),
       ...comments.slice(index + 1)
     ];
+
+    console.log(newComments);
 
   </script>
 </body>

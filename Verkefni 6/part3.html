@@ -58,6 +58,14 @@
     // The same thing goes for objects, let's say we have a person object
 
     // with Objects
+
+
+
+    //Hér býr hann til Object
+
+
+
+
     const person = {
       name: 'Wes Bos',
       age: 80
@@ -67,6 +75,26 @@
     // const captain = person;
     // captain.number = 99;
 
+
+
+
+
+
+    //Object.assign() tekur eitt target object, og n númer of source object.
+    //Hver source object, talið aftur á bak, er bættur í næsta source object.
+    //Svo er loksins sett fyrsta source object í target object.
+    //Object.assign() skilar target object sem return
+
+    //Hér er target object sett sem tómur object, 
+    //fyrsti source object er settur sem person, annar er settur sem { number: 99, age: 12 }
+
+    //Fyrst er person set sem person + source-2, þar með bætt í person 'number' og breitt age = 12
+    //Næst er sent source-1 (A.K.A. person) í target (sem er tómur)
+    //Svo skilar Object.assing() target í cap2
+
+
+
+
     // how do we take a copy instead?
     const cap2 = Object.assign({}, person, { number: 99, age: 12 });
     console.log(cap2);
@@ -74,7 +102,17 @@
     // We will hopefully soon see the object ...spread
     // const cap3 = {...person};
 
+    //   ↑  þetta virkar
+
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+
+
+
+    //Hér er búið til object með object í því
+
+
+
 
     const wes = {
       name: 'Wes',
@@ -85,10 +123,15 @@
       }
     };
 
-    console.clear();
     console.log(wes);
 
+    //Skilar copy af wes í dev 
+
     const dev = Object.assign({}, wes);
+
+    //Hér er búið til copy af wes í dev2 nema það er gert með því að 
+    //senda wes í JSON.stringify(), sem breitir js object í string sem JSON getur lesið
+    //og sendir það svo JSON.parse() sem breitir JSON string í js object.
 
     const dev2 = JSON.parse(JSON.stringify(wes));
 

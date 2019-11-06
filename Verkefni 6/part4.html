@@ -46,13 +46,29 @@
   <ul id="bands"></ul>
 
 <script>
+
+//Búið til array af strings
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+
+//Hér er búið til function sem styttir string með Regular Expression sem leitar að "a", "the", eða "an" (/i þíðir að þetta er ekki case sensitive)
+//í byrjun string og breitir því í '', svo er notað trim til þess að taka í burtu tilgangslausa ' '.
+
 
 function strip(bandName) {
   return bandName.replace(/^(a |the |an )/i, '').trim();
 }
 
+
+//Hér er búið til nýtt array þar sem öll nöfn eru sorteruð eftir lengd sinni 
+//nema þar sem "a", "the", eða "an" hafa verið tekin út
+
 const sortedBands = bands.sort((a, b) => strip(a) > strip(b) ? 1 : -1);
+
+
+//Hér er bætt inn í element með id "bands", string sem er búinn til úr öllum element sortedBands
+//og breitt í list element 
+
+//Það er notað map til þess að breita hverju element, og svo join('') til að breita array í string
 
 document.querySelector('#bands').innerHTML =
   sortedBands

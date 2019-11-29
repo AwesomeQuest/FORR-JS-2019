@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VERKEFNI 7</title>
+    <script src="moment.js"></script>
+
+    <script src="material.js"></script>
+    <link rel="stylesheet" href="material.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+
+
+<body>
+
+
+
+
+<div id="thing"></div>
+
+
+    <script>
+        /*
+        setInterval(() => {
+            let now = moment().format();
+
+        document.getElementById("thing").innerHTML = now + "<br>";}, 1)
+        */
+
+
+
+        let CONCERTSDATA = null;
+
+
+
+        //Fetch data, put data in global variable for posterity, and initialize app
+        fetch("https://apis.is/concerts")
+            .then((response) => {
+
+                //if it didn't go well
+                if (response.status !== 200) {
+                    console.log("Fuck" + response.status.toString());
+                    //stop everything
+                    return;
+                }
+
+                //get the data, put it in a global, forget about it, start the app
+                response.json().then((data)=>{
+                    CONCERTSDATA = data;
+
+                    console.log(data);
+
+                    console.log(moment(data.results[0].dateOfShow).format("dddd, MMMM Do YYYY"));
+
+                    ShowApp(data.results);
+
+                });
+
+            });
+
+        //this function does everything, probably.
+        function ShowApp(data) {
+            document.getElementById("thing").appendChild(returnUlListElem(data));
+        }
+
+
+
+
+
+
+
+        function returnUlListElem(results) {
+
+            console.log(results);
+
+            let outputNodeList = document.createElement("ul");
+            outputNodeList.className += "demo-list-three mdl-list"
+
+            let divContainer = document.createElement("div");
+            divContainer.className += "mdl-grid";
+
+            results.forEach(result => {
+                //create the main listicle
+                let listElem = document.createElement("li");
+                //this is some MDL class magic that makes the thing look nice
+                listElem.className += "mdl-list__item mdl-list__item--three-line mdl-cell mdl-cell--6-col graybox";
+
+                //this is the span that contains the other things
+                let listElemContainerSpan = document.createElement("span");
+                listElemContainerSpan.className += "mdl-list__item-primary-content"
+
+
+                //this is the icon on the left of the element
+                let listIconElem = document.createElement("i");
+                listIconElem.className += "material-icons mdl-list__item-avatar";
+                //the text node defines what icon is shown. I don't know how... fonts I guess
+                listIconElem.appendChild(document.createTextNode("event"));
+
+
+
+                //add icon to span
+                listElemContainerSpan.appendChild(listIconElem);
+
+
+
+                //add the title of the show to the title span
+                let titleSpan = document.createElement("span");
+                titleSpan.appendChild(document.createTextNode(result.eventDateName));
+                listElemContainerSpan.appendChild(titleSpan);
+
+
+                //add some pertenent data to content
+                let contentSpan = document.createElement("span");
+                contentSpan.className += "mdl-list__item-text-body"
+                contentSpan.appendChild(document.createTextNode(result.dateOfShow + "    " + result.eventHallName + "    "  + result.userGroupName));
+                listElemContainerSpan.appendChild(contentSpan);
+
+
+                //append container span
+                listElem.appendChild(listElemContainerSpan);
+
+
+                divContainer.appendChild(listElem);
+
+            });
+
+            for (let i = 0; i < results.length; i++) {
+
+                
+            }
+            
+            outputNodeList.appendChild(divContainer);
+
+            return outputNodeList;
+        }
+
+
+    </script>
+
+</body>
+
+</html>
